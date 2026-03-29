@@ -1,0 +1,27 @@
+{
+  "name": "io-card-platform",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "build:issuer": "npm run build --workspace=apps/card-issuer",
+    "build:processor": "npm run build --workspace=apps/card-processor",
+    "dev:issuer": "npm run dev --workspace=apps/card-issuer",
+    "dev:processor": "npm run dev --workspace=apps/card-processor",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.5.0",
+    "@types/uuid": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  },
+    "engines": {
+    "node": ">=20"
+  }
+}
