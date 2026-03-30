@@ -11,7 +11,6 @@ CREATE TABLE "customers" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "customers_document_type_key" ON "customers"("document_type");
 CREATE UNIQUE INDEX "customers_document_number_key" ON "customers"("document_number");
 CREATE UNIQUE INDEX "customers_email_key" ON "customers"("email");
 
