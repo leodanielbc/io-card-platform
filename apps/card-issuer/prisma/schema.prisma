@@ -7,18 +7,31 @@ datasource db {
   provider = "postgresql"
 }
 
+model Customer {
+  id              String        @id
+  document_type   String
+  document_number String        @unique
+  email           String        @unique
+  age             Int
+  created_at      DateTime
+
+  card_requests   CardRequest[]
+
+  @@map("customers")
+}
+
 model CardRequest {
-  id             String   @id
-  document_type  String   @unique
-  email          String
-  age            Int
+  id             String    @id
+  customer_id    String
+  status         String
   card_type      String
   currency       String
-  status         String
-  force_error    Boolean
-  correlation_id String
+  force_error    Boolean   @default(false)
+  failure_reason String?
   created_at     DateTime
   updated_at     DateTime
+
+  customer       Customer  @relation(fields: [customer_id], references: [id])
 
   @@map("card_requests")
 }
