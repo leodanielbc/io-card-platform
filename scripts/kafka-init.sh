@@ -12,7 +12,7 @@ kafka-topics --bootstrap-server $KAFKA_BROKER --create --if-not-exists \
   --replication-factor 1
 
 kafka-topics --bootstrap-server $KAFKA_BROKER --create --if-not-exists \
-  --topic io.card.issued.v1 \
+  --topic io.cards.issued.v1 \
   --partitions 3 \
   --replication-factor 1
 
