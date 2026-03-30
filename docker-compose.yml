@@ -44,11 +44,12 @@ services:
     environment:
       POSTGRES_USER: io_user
       POSTGRES_PASSWORD: io_password
-      POSTGRES_DB: card_issuer
+      POSTGRES_DB: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U io_user -d card_issuer"]
+      test: ["CMD-SHELL", "pg_isready -U io_user -d card_issuer && pg_isready -U io_user -d card_processor"]
       interval: 5s
       timeout: 5s
       retries: 10

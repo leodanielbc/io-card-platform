@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/infrastructure/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Card {
+  id               String   @id
+  request_id       String   @unique
+  customer_id      String   @unique
+  card_number      String
+  card_number_hash String
+  expiry_date      DateTime
+  cvv_hash         String
+  card_type        String
+  currency         String
+  status           String   @default("ACTIVE")
+  issued_at        DateTime
+
+  @@map("cards")
+}

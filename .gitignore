@@ -9,3 +9,4 @@ doc-test/
 tsconfig.tsbuildinfo
 
 apps/card-issuer/src/infrastructure/generated/prisma
+apps/card-processor/src/infrastructure/generated/prisma
