@@ -3,10 +3,10 @@ import { Currency } from '../../types/Currency.js';
 
 export interface CardsIssuedPayload {
   cardId: string;
-  cardRequestId: string;
+  requestId: string;
+  customerId: string;
   cardNumber: string;
   cardType: CardType;
   currency: Currency;
-  expirationDate: string;
-  cvv: string;
+  expiryDate: string;
 }
