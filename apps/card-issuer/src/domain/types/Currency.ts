@@ -1,6 +1,2 @@
-export const Currency = {
-  PEN: 'PEN',
-  USD: 'USD',
-} as const;
-
-export type Currency = (typeof Currency)[keyof typeof Currency];
+export { Currency } from '@io/shared';
+export type { CurrencyValue } from '@io/shared';

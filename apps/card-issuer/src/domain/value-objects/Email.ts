@@ -15,6 +15,10 @@ export class Email {
     return new Email(normalized);
   }
 
+  static reconstitute(value: string): Email {
+    return new Email(value);
+  }
+
   equals(other: Email): boolean {
     return this.value === other.value;
   }
