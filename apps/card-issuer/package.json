@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node src/main.ts",
+    "dev": "tsx src/main.ts",
     "start": "node dist/main.js",
     "lint": "eslint src --ext .ts",
     "prisma:generate": "prisma generate",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.6",
-    "prisma": "^7.6.0"
+    "prisma": "^7.6.0",
+    "tsx": "^4.21.0"
   }
 }
