@@ -1,7 +1,7 @@
+import { PrismaClient } from '../../generated/prisma/client';
 import { ICardRequestRepository } from '../../../domain/gateways/repositories/ICardRequestRepository.js';
 import { CardRequest } from '../../../domain/entities/CardRequest.js';
 import { CardRequestMapper } from '../mappers/CardRequestMapper.js';
-import { PrismaClient } from '../generated/prisma/client.js';
 
 export class CardRequestRepository implements ICardRequestRepository {
   constructor(private readonly prisma: PrismaClient) {}
@@ -15,11 +15,10 @@ export class CardRequestRepository implements ICardRequestRepository {
     });
   }
 
-  async findByDocumentType(documentType: string): Promise<CardRequest | null> {
-    const row = await this.prisma.cardRequest.findUnique({
-      where: { document_type: documentType },
+  async findByCustomerId(customerId: string): Promise<CardRequest | null> {
+    const row = await this.prisma.cardRequest.findFirst({
+      where: { customer_id: customerId },
     });
-
     if (!row) return null;
     return CardRequestMapper.toDomain(row);
   }

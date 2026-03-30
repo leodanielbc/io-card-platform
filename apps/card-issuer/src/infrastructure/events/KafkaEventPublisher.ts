@@ -1,6 +1,7 @@
 import { Kafka, Producer } from 'kafkajs';
 import { v4 as uuidv4 } from 'uuid';
 import { IEventPublisher } from '../../domain/gateways/services/IEventPublisher.js';
+import { Customer } from '../../domain/entities/Customer.js';
 import { CardRequest } from '../../domain/entities/CardRequest.js';
 import { CloudEvent, TOPICS, CardRequestedPayload } from '@io/shared';
 
@@ -19,12 +20,14 @@ export class KafkaEventPublisher implements IEventPublisher {
     await this.producer.disconnect();
   }
 
-  async publishCardRequested(cardRequest: CardRequest): Promise<void> {
+  async publishCardRequested(customer: Customer, cardRequest: CardRequest, correlationId: string): Promise<void> {
     const payload: CardRequestedPayload = {
-      cardRequestId: cardRequest.id,
-      documentType: cardRequest.documentType,
-      email: cardRequest.email.value,
-      age: cardRequest.age,
+      requestId: cardRequest.id,
+      customerId: customer.id,
+      documentType: customer.documentType,
+      documentNumber: customer.documentNumber,
+      email: customer.email.value,
+      age: customer.age,
       cardType: cardRequest.cardType,
       currency: cardRequest.currency,
       forceError: cardRequest.forceError,
@@ -34,22 +37,17 @@ export class KafkaEventPublisher implements IEventPublisher {
     const event: CloudEvent<CardRequestedPayload> = {
       specversion: '1.0',
       id: uuidv4(),
-      source: 'card-issuer',
+      source: correlationId,
       type: TOPICS.CARD_REQUESTED,
       datacontenttype: 'application/json',
       time: new Date().toISOString(),
-      iocorrelationid: cardRequest.correlationId,
+      iocorrelationid: correlationId,
       data: payload,
     };
 
     await this.producer.send({
       topic: TOPICS.CARD_REQUESTED,
-      messages: [
-        {
-          key: cardRequest.id,
-          value: JSON.stringify(event),
-        },
-      ],
+      messages: [{ key: cardRequest.id, value: JSON.stringify(event) }],
     });
   }
 }
