@@ -35,3 +35,23 @@ services:
     volumes:
       - ./scripts/kafka-init.sh:/scripts/kafka-init.sh
     restart: "no"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: io-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: io_user
+      POSTGRES_PASSWORD: io_password
+      POSTGRES_DB: card_issuer
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U io_user -d card_issuer"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:

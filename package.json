@@ -15,13 +15,12 @@
     "lint": "npm run lint --workspaces --if-present"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^25.5.0",
-    "@types/uuid": "^10.0.0",
+    "@types/uuid": "^11.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2"
   },
-    "engines": {
+  "engines": {
     "node": ">=20"
   }
 }
