@@ -1,59 +1,48 @@
 import { CardRequestStatus } from '../types/CardRequestStatus.js';
 import { CardType } from '../types/CardType.js';
 import { Currency } from '../types/Currency.js';
-import { Email } from '../value-objects/Email.js';
-import { UnderageApplicantException } from '../exceptions/UnderageApplicantException.js';
 
 export interface CardRequestProps {
   id: string;
-  documentType: string;
-  email: Email;
-  age: number;
+  customerId: string;
+  status: CardRequestStatus;
   cardType: CardType;
   currency: Currency;
-  status: CardRequestStatus;
   forceError: boolean;
-  correlationId: string;
+  failureReason: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
 
 export class CardRequest {
   readonly id: string;
-  readonly documentType: string;
-  readonly email: Email;
-  readonly age: number;
+  readonly customerId: string;
+  readonly status: CardRequestStatus;
   readonly cardType: CardType;
   readonly currency: Currency;
-  readonly status: CardRequestStatus;
   readonly forceError: boolean;
-  readonly correlationId: string;
+  readonly failureReason: string | null;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
   private constructor(props: CardRequestProps) {
     this.id = props.id;
-    this.documentType = props.documentType;
-    this.email = props.email;
-    this.age = props.age;
+    this.customerId = props.customerId;
+    this.status = props.status;
     this.cardType = props.cardType;
     this.currency = props.currency;
-    this.status = props.status;
     this.forceError = props.forceError;
-    this.correlationId = props.correlationId;
+    this.failureReason = props.failureReason;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
   }
 
-  static create(props: Omit<CardRequestProps, 'status' | 'createdAt' | 'updatedAt'>): CardRequest {
-    if (props.age < 18) {
-      throw new UnderageApplicantException(props.age);
-    }
-
+  static create(props: Omit<CardRequestProps, 'status' | 'failureReason' | 'createdAt' | 'updatedAt'>): CardRequest {
     const now = new Date();
     return new CardRequest({
       ...props,
       status: CardRequestStatus.PENDING,
+      failureReason: null,
       createdAt: now,
       updatedAt: now,
     });

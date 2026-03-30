@@ -1,6 +1,6 @@
 export const CardRequestStatus = {
   PENDING: 'PENDING',
-  PROCESSED: 'PROCESSED',
+  ISSUED: 'ISSUED',
   FAILED: 'FAILED',
 } as const;
 
