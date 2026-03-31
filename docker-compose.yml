@@ -33,7 +33,7 @@ services:
         condition: service_healthy
     entrypoint: ["/bin/bash", "/scripts/kafka-init.sh"]
     volumes:
-      - ./scripts/kafka-init.sh:/scripts/kafka-init.sh
+      - ./scripts:/scripts
     restart: "no"
 
   postgres:
@@ -53,6 +53,41 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  card-issuer:
+    build:
+      context: .
+      dockerfile: apps/card-issuer/Dockerfile
+    container_name: io-card-issuer
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      SERVICE_NAME: card-issuer
+      KAFKA_BROKERS: kafka:29092
+      DATABASE_URL: postgresql://io_user:io_password@io-postgres:5432/card_issuer?schema=public
+      KAFKAJS_NO_PARTITIONER_WARNING: 1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka-init:
+        condition: service_completed_successfully
+
+  card-processor:
+    build:
+      context: .
+      dockerfile: apps/card-processor/Dockerfile
+    container_name: io-card-processor
+    environment:
+      SERVICE_NAME: card-processor
+      KAFKA_BROKERS: kafka:29092
+      DATABASE_URL: postgresql://io_user:io_password@io-postgres:5432/card_processor?schema=public
+      KAFKAJS_NO_PARTITIONER_WARNING: 1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka-init:
+        condition: service_completed_successfully
 
 volumes:
   postgres_data:
