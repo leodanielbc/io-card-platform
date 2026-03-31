@@ -1,4 +1,4 @@
-import { CardRequest as PrismaCardRequest } from '../../generated/prisma/client';
+import { CardRequest as PrismaCardRequest } from '../../generated/prisma/client.js';
 import { CardRequest } from '../../../domain/entities/CardRequest.js';
 import { CardRequestStatus } from '../../../domain/types/CardRequestStatus.js';
 import { CardType } from '../../../domain/types/CardType.js';

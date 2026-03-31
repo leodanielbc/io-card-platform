@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../generated/prisma/client';
+import { PrismaClient } from '../../generated/prisma/client.js';
 import { ICustomerRepository } from '../../../domain/gateways/repositories/ICustomerRepository.js';
 import { Customer } from '../../../domain/entities/Customer.js';
 import { CustomerMapper } from '../mappers/CustomerMapper.js';

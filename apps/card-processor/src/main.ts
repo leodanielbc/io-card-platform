@@ -1,12 +1,12 @@
 import 'dotenv/config';
 import { Kafka } from 'kafkajs';
-import { prisma } from './infrastructure/persistence/prisma';
-import { CardRepository } from './infrastructure/persistence/repositories/CardRepository';
-import { CardGeneratorService } from './infrastructure/services/CardGeneratorService';
-import { CardIssuanceService } from './infrastructure/services/CardIssuanceService';
-import { KafkaEventPublisher } from './infrastructure/events/KafkaEventPublisher';
-import { ProcessCardRequestUseCase } from './application/use-cases/ProcessCardRequestUseCase';
-import { CardRequestConsumer } from './presentation/consumers/CardRequestConsumer';
+import { prisma } from './infrastructure/persistence/prisma.js';
+import { CardRepository } from './infrastructure/persistence/repositories/CardRepository.js';
+import { CardGeneratorService } from './infrastructure/services/CardGeneratorService.js';
+import { CardIssuanceService } from './infrastructure/services/CardIssuanceService.js';
+import { KafkaEventPublisher } from './infrastructure/events/KafkaEventPublisher.js';
+import { ProcessCardRequestUseCase } from './application/use-cases/ProcessCardRequestUseCase.js';
+import { CardRequestConsumer } from './presentation/consumers/CardRequestConsumer.js';
 
 const SERVICE_NAME = process.env.SERVICE_NAME ?? 'card-processor';
 const KAFKA_BROKERS = process.env.KAFKA_BROKERS ?? 'localhost:9092';

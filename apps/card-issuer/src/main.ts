@@ -12,7 +12,7 @@ import { errorHandler } from "./presentation/middlewares/ErrorHandler.js";
 
 const PORT = process.env.PORT ?? "3001";
 const SERVICE_NAME = process.env.SERVICE_NAME ?? "card-issuer";
-const KAFKA_BROKERS = process.env.KAFKA_BROKER ?? "localhost:9092";
+const KAFKA_BROKERS = process.env.KAFKA_BROKERS ?? "localhost:9092";
 
 async function main(): Promise<void> {
   const kafka = new Kafka({

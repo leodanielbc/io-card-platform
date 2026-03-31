@@ -1,4 +1,4 @@
-import { Customer as PrismaCustomer } from '../../generated/prisma/client';
+import { Customer as PrismaCustomer } from '../../generated/prisma/client.js';
 import { Customer } from '../../../domain/entities/Customer.js';
 import { DocumentType } from '../../../domain/types/DocumentType.js';
 import { Email } from '../../../domain/value-objects/Email.js';

@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../generated/prisma/client';
+import { PrismaClient } from '../../generated/prisma/client.js';
 import { ICardRequestRepository } from '../../../domain/gateways/repositories/ICardRequestRepository.js';
 import { CardRequest } from '../../../domain/entities/CardRequest.js';
 import { CardRequestMapper } from '../mappers/CardRequestMapper.js';
