@@ -9,6 +9,7 @@ export interface CardProps {
   cardNumberHash: string;
   expiryDate: Date;
   cvvHash: string;
+  cvvSalt: string;
   cardType: CardType;
   currency: Currency;
   status: CardStatus;
@@ -23,6 +24,7 @@ export interface CardCreateProps {
   cardNumberHash: string;
   expiryDate: Date;
   cvvHash: string;
+  cvvSalt: string;
   cardType: CardType;
   currency: Currency;
 }
@@ -35,6 +37,7 @@ export class Card {
   readonly cardNumberHash: string;
   readonly expiryDate: Date;
   readonly cvvHash: string;
+  readonly cvvSalt: string;
   readonly cardType: CardType;
   readonly currency: Currency;
   readonly status: CardStatus;
@@ -48,6 +51,7 @@ export class Card {
     this.cardNumberHash = props.cardNumberHash;
     this.expiryDate = props.expiryDate;
     this.cvvHash = props.cvvHash;
+    this.cvvSalt = props.cvvSalt;
     this.cardType = props.cardType;
     this.currency = props.currency;
     this.status = props.status;

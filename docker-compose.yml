@@ -83,6 +83,7 @@ services:
       KAFKA_BROKERS: kafka:29092
       DATABASE_URL: postgresql://io_user:io_password@io-postgres:5432/card_processor?schema=public
       KAFKAJS_NO_PARTITIONER_WARNING: 1
+      CARD_HASH_SECRET: d31fcd28468b7b2aaf8782d1d5fd8198b9a1f410f58406b59e579397ff2741fe
     depends_on:
       postgres:
         condition: service_healthy

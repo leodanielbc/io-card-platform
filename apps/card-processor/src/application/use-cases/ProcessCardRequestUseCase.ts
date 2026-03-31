@@ -53,6 +53,7 @@ export class ProcessCardRequestUseCase {
       cardNumberHash: generated.cardNumberHash,
       expiryDate: generated.expiryDate,
       cvvHash: generated.cvvHash,
+      cvvSalt: generated.cvvSalt,
     });
   }
 

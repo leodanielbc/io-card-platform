@@ -3,6 +3,7 @@ export interface GeneratedCardData {
   cardNumberHash: string;
   expiryDate: Date;
   cvvHash: string;
+  cvvSalt: string;
 }
 
 export interface ICardGenerator {

@@ -12,6 +12,11 @@ const SERVICE_NAME = process.env.SERVICE_NAME ?? 'card-processor';
 const KAFKA_BROKERS = process.env.KAFKA_BROKERS ?? 'localhost:9092';
 
 async function main(): Promise<void> {
+  const CARD_HASH_SECRET = process.env.CARD_HASH_SECRET;
+  if (!CARD_HASH_SECRET) {
+    throw new Error('Missing required environment variable: CARD_HASH_SECRET');
+  }
+
   const kafka = new Kafka({
     clientId: SERVICE_NAME,
     brokers: KAFKA_BROKERS.split(','),
@@ -21,7 +26,7 @@ async function main(): Promise<void> {
   await eventPublisher.connect();
 
   const cardRepository = new CardRepository(prisma);
-  const cardGenerator = new CardGeneratorService();
+  const cardGenerator = new CardGeneratorService(CARD_HASH_SECRET);
   const cardIssuanceGateway = new CardIssuanceService();
 
   const processCardRequest = new ProcessCardRequestUseCase(
